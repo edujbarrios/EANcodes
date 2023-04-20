@@ -99,4 +99,14 @@ class Producto {
     public void guardarProducto() throws IOException {
         
         // Crear el archivo para el producto en la carpeta "Productos"
-        String fileName
+        String fileName = getNombreArchivo();
+        File outputFile = new File(fileName);
+        if (!outputFile.getParentFile().exists()) {
+        // Si la carpeta "Productos" no existe, crearla
+        outputFile.getParentFile().mkdirs();
+    }
+        // Guardar los datos del producto en el archivo
+        String data = "Nombre: " + nombre + "\n" + "Código: " + codigo + "\n" + "Precio: $" + precio;
+        FileUtils.writeStringToFile(outputFile, data, "UTF-8");
+    }
+    }
